@@ -1,0 +1,35 @@
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px; /* Aumenta o tamanho horizontal da barra */
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alinha o conteúdo no topo */
+  padding: 20px;
+}
+
+.sidebar h2 {
+  font-size: 24px; /* Aumenta o tamanho da fonte do título */
+  margin-bottom: 5px; /* Diminui a margem inferior do título */
+}
+
+.sidebar p {
+  font-size: 18px; /* Aumenta o tamanho da fonte do texto */
+  margin-bottom: 10px; /* Diminui a margem inferior do texto */
+}
+
+.sidebar a {
+  font-size: 18px; /* Aumenta o tamanho da fonte dos links */
+  text-decoration: none;
+  color: #333;
+  margin-bottom: 5px; /* Diminui a margem inferior dos links */
+  transition: color 0.3s ease;
+}
+
+.sidebar a:hover {
+  color: #666;
+}

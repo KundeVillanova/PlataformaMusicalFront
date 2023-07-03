@@ -1,0 +1,6 @@
+.body {
+  display: flex;
+  height: 100vh;
+  background-image: url(../../assets/img/img.jpg);
+  background-size: cover;
+}

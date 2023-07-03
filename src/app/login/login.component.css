@@ -1,0 +1,14 @@
+.body {
+    align-items: center; /* Centraliza verticalmente */
+    justify-content: center; /* Centraliza horizontalmente */
+    height: 100vh;
+    background-image: url(../../assets/img/show.jpg);
+    background-size: cover;
+}
+ 
+.custom-class {
+    background-color: rgba(255, 255, 255, 0.8); /* Defina o nível de transparência */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 100px;
+}
