@@ -10,7 +10,7 @@ import { IndexComponent } from './index/index.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CorsConfig } from 'src/config/CorsConfig';
-import { LoginService } from './services/login.service';
+import { LoginService } from './services/authentication-request.service';
 import { HomeComponent } from './home/home.component';
 
 // tem q declarar os modulos aqui
