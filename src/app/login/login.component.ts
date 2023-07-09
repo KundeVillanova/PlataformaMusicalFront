@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Usuario } from './usuario';
-import { LoginService } from '../services/authentication-request.service';
+import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,10 +12,10 @@ export class LoginComponent {
   usuario: Usuario = new Usuario();
   erroLogin = false;
 
-  constructor(private loginService: LoginService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   logar(): void {
-    this.loginService.login(this.usuario).subscribe(
+    this.authService.login(this.usuario).subscribe(
       () => {
         console.log('Deu bom fiote !!! iihuuu !')
         this.router.navigate(['/home']);
