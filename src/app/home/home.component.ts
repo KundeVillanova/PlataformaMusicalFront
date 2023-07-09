@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { Usuario } from '../login/usuario';
+import { InstrumentoService } from '../services/instrumento.service';
 
 @Component({
   selector: 'app-home',
@@ -10,18 +11,14 @@ import { Usuario } from '../login/usuario';
 export class HomeComponent implements OnInit {
   usuario: Usuario | undefined;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private instrumentoService: InstrumentoService) { }
 
   ngOnInit(): void {
-    // const userId = 10012; 
-    // this.authService.getUsuario(userId).subscribe(
-    //   (usuario) => {
-    //     this.usuario = usuario;
-    //     console.log(usuario);
-    //   },
-    //   (error) => {
-    //     console.error('Erro ao obter o usuário:', error);
-    //   }
-    // );
+    const username = this.authService.obterUsername();
+    console.log('------------->>>> Username: ', username);
+    this.instrumentoService.getAllInstrumentos().subscribe(instrumentos => {
+      console.log('Lista de Instrumentos:', instrumentos);
+    });
   }
 }
+

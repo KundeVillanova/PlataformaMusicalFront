@@ -45,4 +45,16 @@ export class AuthService {
     }
     return 'token n obtido';
   }
+
+  obterUsername(): string {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      const decodedToken = this.jwtHelper.decodeToken(token);
+      if (decodedToken && decodedToken.sub) {
+        return decodedToken.sub;
+      }
+    }
+    return 'deu ruim';
+  }
+  
 }
