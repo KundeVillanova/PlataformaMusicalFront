@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-import { Usuario } from '../login/usuario';
-import { InstrumentoService } from '../services/instrumento.service';
+import { UsuarioDto } from '../models/usuario';
 
 @Component({
   selector: 'app-home',
@@ -9,16 +8,19 @@ import { InstrumentoService } from '../services/instrumento.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  usuario: Usuario | undefined;
+  
+  usuario: UsuarioDto | undefined;
 
-  constructor(private authService: AuthService, private instrumentoService: InstrumentoService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     const username = this.authService.obterUsername();
     console.log('------------->>>> Username: ', username);
-    this.instrumentoService.getAllInstrumentos().subscribe(instrumentos => {
-      console.log('Lista de Instrumentos:', instrumentos);
+    this.authService.getUsuarioByUsername(username).subscribe(usuario => {
+      this.usuario = usuario;
+      console.log('Usuario Logado:', this.usuario);
     });
   }
+
 }
 

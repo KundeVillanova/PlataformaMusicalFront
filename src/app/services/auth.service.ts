@@ -4,13 +4,14 @@ import { Observable, tap } from 'rxjs';
 import { Usuario } from '../login/usuario';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from '../../environments/environment';
+import { UsuarioDto } from '../models/usuario';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  
   private baseUrl = environment.apiURLBase + '/api/usuarios';
-  private tokenUrl = environment.apiURLBase + environment.obterTokenUrl;
   private jwtHelper: JwtHelperService;
 
   constructor(private http: HttpClient) {
@@ -31,21 +32,6 @@ export class AuthService {
     );
   }
 
-  getUsuario(id: number): Observable<Usuario> {
-    const token = this.obterToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    return this.http.get<Usuario>(`${this.baseUrl}/${id}`, { headers });
-  }
-
-  obterToken(): string {
-    const tokenString = localStorage.getItem('access_token');
-    if (tokenString) {
-      const token = this.jwtHelper.decodeToken(tokenString);
-      return token;
-    }
-    return 'token n obtido';
-  }
-
   obterUsername(): string {
     const token = localStorage.getItem('access_token');
     if (token) {
@@ -55,6 +41,12 @@ export class AuthService {
       }
     }
     return 'deu ruim';
+  }
+
+  getUsuarioByUsername(username: string): Observable<UsuarioDto> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<UsuarioDto>(`${this.baseUrl}/nome/${username}`, { headers });
   }
   
 }
