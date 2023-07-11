@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UsuarioDto } from '../models/usuario';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +12,7 @@ export class HomeComponent implements OnInit {
   
   usuario: UsuarioDto | undefined;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     const username = this.authService.obterUsername();
@@ -22,5 +23,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  logout(): void {
+    this.authService.sair();
+    this.router.navigate(['/login']);
+  }
+
 }
+
 

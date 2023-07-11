@@ -1,14 +1,41 @@
 .sidebar {
     background-color: #c2b6b6;
     height: 100vh;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20px;
+  }
   
-.content {
+  .sidebar-title {
+    margin-bottom: 20px;
+    color: black;
+  }
+  
+  .sidebar-options {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .option-link {
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    margin-bottom: 5px;
+    transition: background-color 0.3s;
+  }
+  
+  .option-link:hover {
+    background-color: #a09d9d;
+  }
+  
+  .content {
     background-color: #b48484;
     height: 100vh;
-}
+  }
   
-.container {
+  .container {
     background-color: #3986d3;
-}
+  }
   

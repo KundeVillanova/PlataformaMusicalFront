@@ -49,4 +49,8 @@ export class AuthService {
     return this.http.get<UsuarioDto>(`${this.baseUrl}/nome/${username}`, { headers });
   }
   
+  sair(){
+    localStorage.removeItem('access_token')
+  }
+
 }
