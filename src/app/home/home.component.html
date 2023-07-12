@@ -3,17 +3,20 @@
     <div class="col-md-2 sidebar">
       <h3 class="sidebar-title">{{ usuario?.nome }}</h3>
       <div class="sidebar-options">
-        <a class="option-link" routerLink="/meu-perfil">Meu Perfil</a>
+        <a class="option-link" routerLink="/perfil">Meu Perfil</a>
         <a class="option-link" routerLink="/anunciar-vaga">Anunciar Vaga</a>
         <a class="option-link" routerLink="/anunciar-show">Anunciar Show</a>
         <a class="option-link" (click)="logout()">Sair</a>
       </div>
     </div>
     <div class="col-md content">
-      <h3>Feed</h3>
+      <ng-container *ngIf="exibirPerfil">
+        <app-perfil></app-perfil>
+      </ng-container>
     </div>
   </div>
 </div>
+
 
 
   

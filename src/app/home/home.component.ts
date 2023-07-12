@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UsuarioDto } from '../models/usuario';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +11,13 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   
   usuario: UsuarioDto | undefined;
+  exibirPerfil: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     const username = this.authService.obterUsername();
@@ -20,6 +25,11 @@ export class HomeComponent implements OnInit {
     this.authService.getUsuarioByUsername(username).subscribe(usuario => {
       this.usuario = usuario;
       console.log('Usuario Logado:', this.usuario);
+    });
+    this.route.url.subscribe((urlSegments) => {
+      if (urlSegments.length > 0 && urlSegments[0].path === 'perfil') {
+        this.exibirPerfil = true;
+      }
     });
   }
 

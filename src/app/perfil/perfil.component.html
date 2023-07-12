@@ -1,0 +1,26 @@
+<div class="perfil-container">
+    <h2>Meu Perfil</h2>
+    <form [formGroup]="perfilForm" (ngSubmit)="atualizarPerfil()">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" formControlName="nome" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email" required>
+      </div>
+      <div class="form-group">
+        <label for="dataNascimento">Data de Nascimento:</label>
+        <input type="date" id="dataNascimento" formControlName="dataNascimento" required>
+      </div>
+      <div class="form-group">
+        <label for="celular">Celular:</label>
+        <input type="text" id="celular" formControlName="celular" required>
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" formControlName="senha" required>
+      </div>
+      <button type="submit" [disabled]="perfilForm.invalid">Salvar</button>
+    </form>
+</div>

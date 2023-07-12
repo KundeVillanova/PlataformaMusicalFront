@@ -32,6 +32,11 @@ export class AuthService {
     );
   }
 
+  getToken(): string | null {
+    const token = localStorage.getItem('access_token');
+    return token !== null ? token : null;
+  }
+  
   obterUsername(): string {
     const token = localStorage.getItem('access_token');
     if (token) {
@@ -52,5 +57,12 @@ export class AuthService {
   sair(){
     localStorage.removeItem('access_token')
   }
+
+  updateUsuario(idUser: number, usuario: UsuarioDto): Observable<any> {
+    const url = `${this.baseUrl}/${idUser}`;
+    const token = this.getToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.put<any>(url, usuario, { headers });
+  }  
 
 }

@@ -5,8 +5,9 @@ export interface UsuarioDto {
     dataNascimento: string;
     celular: string;
     senha: string;
-    tiposMusicais: number;
+    tiposMusicais: number[]; // atualizado para array de números
     bandas: number[];
     shows: number[];
     experiencias: number[];
 }
+  
