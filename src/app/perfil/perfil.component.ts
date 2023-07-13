@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { UsuarioDto } from '../models/usuario';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { TipoMusicalService } from '../services/tipo-musical.service';
+import { TipoMusical } from '../models/TipoMusical';
+import { InstrumentoService } from '../services/instrumento.service';
+import { Instrumento } from '../models/Instrumento';
 
 @Component({
   selector: 'app-perfil',
@@ -9,10 +13,19 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./perfil.component.css']
 })
 export class PerfilComponent implements OnInit {
+  
   usuario: UsuarioDto | undefined;
   perfilForm: FormGroup;
+  tiposMusicais: TipoMusical[] = [];
+  instrumentos: Instrumento[] = [];
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private authService: AuthService, 
+    private formBuilder: FormBuilder,
+    private tipoMusicalService: TipoMusicalService,
+    private instrumentoService: InstrumentoService
+    ) 
+    {
     this.perfilForm = this.formBuilder.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -27,6 +40,8 @@ export class PerfilComponent implements OnInit {
     this.authService.getUsuarioByUsername(username).subscribe(usuario => {
       this.usuario = usuario;
       this.preencherFormulario();
+      this.carregarTiposMusicais();
+      this.carregarInstrumentos();
     });
   }
 
@@ -68,4 +83,17 @@ export class PerfilComponent implements OnInit {
       });
     }
   }
+
+  carregarTiposMusicais(): void {
+    this.tipoMusicalService.getAllTipoMusicals().subscribe(tiposMusicais => {
+      this.tiposMusicais = tiposMusicais;
+    });
+  }
+
+  carregarInstrumentos(): void {
+    this.instrumentoService.getAllInstrumentos().subscribe(instrumentos => {
+      this.instrumentos = instrumentos;
+    });
+  }
+
 }

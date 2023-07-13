@@ -1,5 +1,6 @@
-<div class="perfil-container">
-    <h2>Meu Perfil</h2>
+<div class="card-container">
+
+  <div class="card shadow">
     <form [formGroup]="perfilForm" (ngSubmit)="atualizarPerfil()">
       <div class="form-group">
         <label for="nome">Nome:</label>
@@ -23,4 +24,24 @@
       </div>
       <button type="submit" [disabled]="perfilForm.invalid">Salvar</button>
     </form>
+  </div>
+
+  <div class="card">
+    <h3>Estilos Musicais Favoritos</h3>
+    <div class="tipos-musicais">
+      <div class="tipo-musical" *ngFor="let tipoMusical of tiposMusicais">
+        {{ tipoMusical.nomeTipo }}
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Instrumentos</h3>
+    <div class="instrumentos-lista">
+      <div class="instrumento" *ngFor="let instrumento of instrumentos">
+        {{ instrumento.nomeInstrumento }}
+      </div>
+    </div>
+  </div>
+
 </div>
