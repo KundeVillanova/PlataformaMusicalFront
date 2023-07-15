@@ -5,6 +5,7 @@ import { IndexComponent } from './index/index.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
 import { HomeComponent } from './home/home.component';
 import { PerfilComponent } from './perfil/perfil.component';
+import { PostShowComponent } from './post-show/post-show.component';
 
 
 const routes: Routes = [
@@ -12,7 +13,8 @@ const routes: Routes = [
   { path: 'cadastro', component: CadastroComponent },
   { path: '', component: IndexComponent },
   { path: 'home', component: HomeComponent , children:[
-    { path: 'perfil', component: PerfilComponent }
+    { path: 'perfil', component: PerfilComponent },
+    { path: 'post-show', component: PostShowComponent }
   ]}
 ];
 

@@ -1,0 +1,70 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card mx-3 my-3">
+          <div class="card-body">
+            <h5 class="card-title">Cadastrar PostShow</h5>
+            <form>
+              <div class="mb-3">
+                <label for="tituloShow" class="form-label">Título do Show</label>
+                <input type="text" class="form-control" id="tituloShow" placeholder="Digite o título do show">
+              </div>
+              <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" rows="3" placeholder="Digite a descrição do show"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="dia" class="form-label">Dia</label>
+                <input type="date" class="form-control" id="dia">
+              </div>
+              <div class="mb-3">
+                <label for="hora" class="form-label">Hora</label>
+                <input type="time" class="form-control" id="hora">
+              </div>
+              <div class="mb-3">
+                <label for="lugar" class="form-label">Lugar</label>
+                <input type="text" class="form-control" id="lugar" placeholder="Digite o lugar do show">
+              </div>
+              <div class="mb-3">
+                <label for="ingressos" class="form-label">Ingressos</label>
+                <input type="number" class="form-control" id="ingressos" placeholder="Digite a quantidade de ingressos">
+              </div>
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mx-3 my-3">
+          <div class="card-body">
+            <h5 class="card-title">Listagem de PostShows</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Título do Show</th>
+                  <th scope="col">Opções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Exemplo de Título 1</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Excluir</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Exemplo de Título 2</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Excluir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  

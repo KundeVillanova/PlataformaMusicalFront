@@ -7,5 +7,6 @@ export interface PostShowDTO {
     lugar?: string;
     ingressos?: number;
     idTipoShow?: number;
+    idUser?: number;
 }
   
