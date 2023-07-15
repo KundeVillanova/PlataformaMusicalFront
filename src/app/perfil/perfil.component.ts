@@ -6,6 +6,7 @@ import { TipoMusicalService } from '../services/tipo-musical.service';
 import { TipoMusical } from '../models/TipoMusical';
 import { InstrumentoService } from '../services/instrumento.service';
 import { Instrumento } from '../models/Instrumento';
+import { Experiencia } from '../models/Experiencia';
 
 @Component({
   selector: 'app-perfil',
@@ -18,6 +19,8 @@ export class PerfilComponent implements OnInit {
   perfilForm: FormGroup;
   tiposMusicais: TipoMusical[] = [];
   instrumentos: Instrumento[] = [];
+  tiposMusicaisSelecionados: number[] = [];
+  niveis: Experiencia[] = Object.values(Experiencia);
 
   constructor(
     private authService: AuthService, 
@@ -74,15 +77,22 @@ export class PerfilComponent implements OnInit {
         dataNascimento: this.perfilForm.value.dataNascimento,
         celular: this.perfilForm.value.celular,
         senha: this.perfilForm.value.senha,
-        tiposMusicais: this.usuario.tiposMusicais,
+        tiposMusicais: this.getTiposMusicaisSelecionados(), // Obter tipos musicais selecionados
         experiencias: this.usuario.experiencias
       };
-
+  
       this.authService.updateUsuario(this.usuario.idUser, perfilAtualizado).subscribe(() => {
         // Atualize as informações na interface ou redirecione para outra página
       });
     }
   }
+  
+  getTiposMusicaisSelecionados(): number[] {
+    return this.tiposMusicais
+      .filter(tipoMusical => tipoMusical.selecionado)
+      .map(tipoMusical => tipoMusical.id);
+  }
+  
 
   carregarTiposMusicais(): void {
     this.tipoMusicalService.getAllTipoMusicals().subscribe(tiposMusicais => {
@@ -96,4 +106,28 @@ export class PerfilComponent implements OnInit {
     });
   }
 
+
+  isTipoMusicalSelecionado(tipoMusicalId: number): boolean {
+    return this.tiposMusicaisSelecionados.includes(tipoMusicalId);
+  }
+  toggleTipoMusical(tipoMusicalId: number): void {
+    const index = this.tiposMusicaisSelecionados.indexOf(tipoMusicalId);
+    if (index === -1) {
+      this.tiposMusicaisSelecionados.push(tipoMusicalId);
+    } else {
+      this.tiposMusicaisSelecionados.splice(index, 1);
+    }
+  }
+  atualizarTiposMusicais(): void {
+    if (this.usuario) {
+      const perfilAtualizado: UsuarioDto = {
+        ...this.usuario,
+        tiposMusicais: this.tiposMusicaisSelecionados
+      };
+      this.authService.updateUsuario(this.usuario.idUser, perfilAtualizado).subscribe(() => {
+        // Atualize as informações na interface ou redirecione para outra página
+      });
+    }
+  }
 }
+

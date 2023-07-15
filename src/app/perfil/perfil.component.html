@@ -1,47 +1,55 @@
 <div class="card-container">
 
   <div class="card shadow">
+    <h2 class="text-center">Dados Usuario</h2>
     <form [formGroup]="perfilForm" (ngSubmit)="atualizarPerfil()">
       <div class="form-group">
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" formControlName="nome" required>
+        <input type="text" id="nome" formControlName="nome" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
-        <input type="email" id="email" formControlName="email" required>
+        <input type="email" id="email" formControlName="email" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="dataNascimento">Data de Nascimento:</label>
-        <input type="date" id="dataNascimento" formControlName="dataNascimento" required>
+        <input type="date" id="dataNascimento" formControlName="dataNascimento" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="celular">Celular:</label>
-        <input type="text" id="celular" formControlName="celular" required>
+        <input type="text" id="celular" formControlName="celular" class="form-control" required>
       </div>
       <div class="form-group">
         <label for="senha">Senha:</label>
-        <input type="password" id="senha" formControlName="senha" required>
+        <input type="password" id="senha" formControlName="senha" class="form-control" required>
       </div>
-      <button type="submit" [disabled]="perfilForm.invalid">Salvar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="perfilForm.invalid">Salvar</button>
     </form>
   </div>
 
   <div class="card">
-    <h3>Estilos Musicais Favoritos</h3>
+    <h2 class="text-center">Estilos Musicais Favoritos</h2>
     <div class="tipos-musicais">
-      <div class="tipo-musical" *ngFor="let tipoMusical of tiposMusicais">
-        {{ tipoMusical.nomeTipo }}
+      <div class="tipo-musical d-flex align-items-center justify-content-center" *ngFor="let tipoMusical of tiposMusicais">
+        <div class="checkbox-container">
+          <input type="checkbox" id="tipoMusical{{ tipoMusical.id }}" [(ngModel)]="tipoMusical.selecionado" class="form-check-input">
+          <label for="tipoMusical{{ tipoMusical.id }}" class="form-check-label">{{ tipoMusical.nomeTipo }}</label>
+        </div>
       </div>
     </div>
   </div>
+  
 
   <div class="card">
     <h3>Instrumentos</h3>
     <div class="instrumentos-lista">
       <div class="instrumento" *ngFor="let instrumento of instrumentos">
         {{ instrumento.nomeInstrumento }}
+        <select class="form-control">
+          <option value="" disabled>Selecione um nível</option>
+          <option *ngFor="let nivel of niveis" [value]="nivel">{{ nivel }}</option>
+        </select>
       </div>
     </div>
   </div>
-
 </div>
