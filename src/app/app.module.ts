@@ -14,6 +14,8 @@ import { LoginService } from './services/authentication-request.service';
 import { HomeComponent } from './home/home.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { PostShowComponent } from './post-show/post-show.component';
+import { PostBandaComponent } from './post-banda/post-banda.component';
+import { FeedComponent } from './feed/feed.component';
 
 // tem q declarar os modulos aqui
 @NgModule({
@@ -25,7 +27,9 @@ import { PostShowComponent } from './post-show/post-show.component';
     CadastroComponent,
     HomeComponent,
     PerfilComponent,
-    PostShowComponent
+    PostShowComponent,
+    PostBandaComponent,
+    FeedComponent
   ],
   imports: [
     BrowserModule,

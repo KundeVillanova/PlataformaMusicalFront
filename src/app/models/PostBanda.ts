@@ -4,5 +4,6 @@ export interface PostBandaDTO {
     descricao: string;
     vagas: number[];
     idTipoMusical?: number;
+    idUser?: number;
 }
   

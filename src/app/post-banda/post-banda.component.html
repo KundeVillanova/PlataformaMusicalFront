@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="row">
+      <div class="col">
+        <div class="card mx-3 my-3">
+          <div class="card-body">
+            <h5 class="card-title">Cadastrar PostBanda</h5>
+            <form>
+              <div class="mb-3">
+                <label for="tituloBanda" class="form-label">Título da Banda</label>
+                <input type="text" class="form-control" id="tituloBanda" placeholder="Digite o título da banda">
+              </div>
+              <div class="mb-3">
+                <label for="descricao" class="form-label">Descrição</label>
+                <textarea class="form-control" id="descricao" rows="3" placeholder="Digite a descrição da banda"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="vagas" class="form-label">Vagas</label>
+                <input type="text" class="form-control" id="vagas" placeholder="Digite as vagas da banda">
+              </div>
+              <div class="mb-3">
+                <label for="idTipoMusical" class="form-label">Tipo Musical</label>
+                <input type="text" class="form-control" id="idTipoMusical" placeholder="Digite o tipo musical da banda">
+              </div>
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mx-3 my-3">
+          <div class="card-body">
+            <h5 class="card-title">Listagem de PostBandas</h5>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Título da Banda</th>
+                  <th scope="col">Opções</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Exemplo de Título 1</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Excluir</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td>Exemplo de Título 2</td>
+                  <td>
+                    <button class="btn btn-primary btn-sm">Editar</button>
+                    <button class="btn btn-danger btn-sm">Excluir</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
