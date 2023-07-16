@@ -27,8 +27,7 @@ export class PerfilComponent implements OnInit {
     private formBuilder: FormBuilder,
     private tipoMusicalService: TipoMusicalService,
     private instrumentoService: InstrumentoService
-    ) 
-    {
+  ) {
     this.perfilForm = this.formBuilder.group({
       nome: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -57,6 +56,7 @@ export class PerfilComponent implements OnInit {
         celular: this.usuario.celular,
         senha: this.usuario.senha
       });
+      this.tiposMusicaisSelecionados = this.usuario.tiposMusicais || [];
     }
   }
 
@@ -77,22 +77,16 @@ export class PerfilComponent implements OnInit {
         dataNascimento: this.perfilForm.value.dataNascimento,
         celular: this.perfilForm.value.celular,
         senha: this.perfilForm.value.senha,
-        tiposMusicais: this.getTiposMusicaisSelecionados(), // Obter tipos musicais selecionados
-        experiencias: this.usuario.experiencias
+        tiposMusicais: this.tiposMusicaisSelecionados,
+        bandas: this.usuario.bandas || [],
+        shows: this.usuario.shows || [],
+        experiencias: this.usuario.experiencias || []
       };
-  
       this.authService.updateUsuario(this.usuario.idUser, perfilAtualizado).subscribe(() => {
-        // Atualize as informações na interface ou redirecione para outra página
+        console.log("sucesso")
       });
     }
   }
-  
-  getTiposMusicaisSelecionados(): number[] {
-    return this.tiposMusicais
-      .filter(tipoMusical => tipoMusical.selecionado)
-      .map(tipoMusical => tipoMusical.id);
-  }
-  
 
   carregarTiposMusicais(): void {
     this.tipoMusicalService.getAllTipoMusicals().subscribe(tiposMusicais => {
@@ -106,28 +100,13 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-
-  isTipoMusicalSelecionado(tipoMusicalId: number): boolean {
-    return this.tiposMusicaisSelecionados.includes(tipoMusicalId);
-  }
-  toggleTipoMusical(tipoMusicalId: number): void {
-    const index = this.tiposMusicaisSelecionados.indexOf(tipoMusicalId);
-    if (index === -1) {
-      this.tiposMusicaisSelecionados.push(tipoMusicalId);
-    } else {
-      this.tiposMusicaisSelecionados.splice(index, 1);
-    }
-  }
-  atualizarTiposMusicais(): void {
-    if (this.usuario) {
-      const perfilAtualizado: UsuarioDto = {
-        ...this.usuario,
-        tiposMusicais: this.tiposMusicaisSelecionados
-      };
-      this.authService.updateUsuario(this.usuario.idUser, perfilAtualizado).subscribe(() => {
-        // Atualize as informações na interface ou redirecione para outra página
+  adicionarEstilosMusicais(): void {
+    const tiposMusicaisSelecionados = this.tiposMusicais.filter(tipoMusical => tipoMusical.selecionado).map(tipoMusical => tipoMusical.id);
+    if (tiposMusicaisSelecionados.length > 0) {
+      this.authService.adicionarTiposMusicais(this.usuario!.idUser, tiposMusicaisSelecionados).subscribe(() => {
+        console.log('Estilos musicais adicionados com sucesso');
       });
     }
   }
-}
 
+}

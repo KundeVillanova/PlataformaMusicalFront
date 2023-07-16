@@ -23,34 +23,36 @@
         <label for="senha">Senha:</label>
         <input type="password" id="senha" formControlName="senha" class="form-control" required>
       </div>
-      <button type="submit" class="btn btn-primary" [disabled]="perfilForm.invalid">Salvar</button>
+      <button type="submit" class="btn btn-primary" [disabled]="!perfilForm.valid">Salvar</button>
     </form>
   </div>
 
   <div class="card">
     <h2 class="text-center">Estilos Musicais Favoritos</h2>
-    <div class="tipos-musicais">
-      <div class="tipo-musical d-flex align-items-center justify-content-center" *ngFor="let tipoMusical of tiposMusicais">
-        <div class="checkbox-container">
-          <input type="checkbox" id="tipoMusical{{ tipoMusical.id }}" [(ngModel)]="tipoMusical.selecionado" class="form-check-input">
-          <label for="tipoMusical{{ tipoMusical.id }}" class="form-check-label">{{ tipoMusical.nomeTipo }}</label>
+    <form (ngSubmit)="adicionarEstilosMusicais()" name="estilosMusicaisForm">
+      <div class="tipos-musicais">
+        <div class="tipo-musical d-flex align-items-center justify-content-center" *ngFor="let tipoMusical of tiposMusicais">
+          <div class="checkbox-container">
+            <input type="checkbox" id="tipoMusical{{ tipoMusical.id }}" [(ngModel)]="tipoMusical.selecionado" name="tipoMusical{{ tipoMusical.id }}" class="form-check-input">
+            <label for="tipoMusical{{ tipoMusical.id }}" class="form-check-label">{{ tipoMusical.nomeTipo }}</label>
+          </div>
         </div>
       </div>
-    </div>
+      <button type="submit" class="btn btn-primary">Salvar Estilos Musicais</button>
+    </form>    
   </div>
-  
 
   <div class="card">
-    <h3>Instrumentos</h3>
+    <h2 class="text-center">Instrumentos</h2>
     <div class="instrumentos-lista">
       <div class="instrumento" *ngFor="let instrumento of instrumentos">
         {{ instrumento.nomeInstrumento }}
-        <select class="form-control">
+        <select class="form-control" [(ngModel)]="instrumento.idInstrumento">
           <option value="" disabled>Selecione um nível</option>
           <option *ngFor="let nivel of niveis" [value]="nivel">{{ nivel }}</option>
         </select>
       </div>
     </div>
   </div>
-  
+
 </div>

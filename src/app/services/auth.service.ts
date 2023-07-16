@@ -65,4 +65,11 @@ export class AuthService {
     return this.http.put<any>(url, usuario, { headers });
   }  
 
+
+  adicionarTiposMusicais(idUser: number, tiposMusicaisIds: number[]): Observable<any> {
+    const url = `${this.baseUrl}/${idUser}/tipos-musicais`;
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(url, tiposMusicaisIds, { headers });
+  }
 }
