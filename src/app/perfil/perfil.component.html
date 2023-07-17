@@ -31,16 +31,18 @@
     <h2 class="text-center">Estilos Musicais Favoritos</h2>
     <form (ngSubmit)="adicionarEstilosMusicais()" name="estilosMusicaisForm">
       <div class="tipos-musicais">
-        <div class="tipo-musical d-flex align-items-center justify-content-center" *ngFor="let tipoMusical of tiposMusicais">
+        <div class="tipo-musical" *ngFor="let tipoMusical of tiposMusicais">
           <div class="checkbox-container">
             <input type="checkbox" id="tipoMusical{{ tipoMusical.id }}" [(ngModel)]="tipoMusical.selecionado" name="tipoMusical{{ tipoMusical.id }}" class="form-check-input">
             <label for="tipoMusical{{ tipoMusical.id }}" class="form-check-label">{{ tipoMusical.nomeTipo }}</label>
           </div>
+          <hr class="line">
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Salvar Estilos Musicais</button>
-    </form>    
+    </form>
   </div>
+  
 
   <div class="card">
     <h2 class="text-center">Instrumentos</h2>

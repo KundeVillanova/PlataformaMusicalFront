@@ -90,9 +90,13 @@ export class PerfilComponent implements OnInit {
 
   carregarTiposMusicais(): void {
     this.tipoMusicalService.getAllTipoMusicals().subscribe(tiposMusicais => {
-      this.tiposMusicais = tiposMusicais;
+      this.tiposMusicais = tiposMusicais.map(tipoMusical => {
+        tipoMusical.selecionado = this.tiposMusicaisSelecionados.includes(tipoMusical.id);
+        return tipoMusical;
+      });
     });
   }
+  
 
   carregarInstrumentos(): void {
     this.instrumentoService.getAllInstrumentos().subscribe(instrumentos => {
