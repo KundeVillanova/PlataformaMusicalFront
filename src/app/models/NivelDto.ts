@@ -1,9 +1,9 @@
 import { Experiencia } from "./Experiencia";
 import { Instrumento } from "./Instrumento";
 
-export interface Nivel {
-    idNivel: number;
+export interface NivelDto {
     experiencia: Experiencia;
-    idInstrumento: Instrumento;
+    idInstrumento: number;
     idUser?: number;
 }
+  

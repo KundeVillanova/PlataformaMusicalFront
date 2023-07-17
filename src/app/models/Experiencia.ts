@@ -1,4 +1,5 @@
 export enum Experiencia {
+    NENHUM = 'NENHUM',
     INICIANTE = 'INICIANTE',
     MEDIO = 'MEDIO',
     INTERMEDIARIO = 'INTERMEDIARIO',

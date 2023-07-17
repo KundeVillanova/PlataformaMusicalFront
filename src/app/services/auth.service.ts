@@ -72,4 +72,12 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.post<any>(url, tiposMusicaisIds, { headers });
   }
+
+  adicionarNivelInstrumento(idUser: number, niveisInstrumentos: any[]): Observable<any> {
+    const url = `${this.baseUrl}/${idUser}/niveis-instrumentos`;
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.post<any>(url, niveisInstrumentos, { headers });
+  }
+  
 }

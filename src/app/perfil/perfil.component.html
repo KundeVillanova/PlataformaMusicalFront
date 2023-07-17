@@ -46,15 +46,21 @@
 
   <div class="card">
     <h2 class="text-center">Instrumentos</h2>
-    <div class="instrumentos-lista">
-      <div class="instrumento" *ngFor="let instrumento of instrumentos">
-        {{ instrumento.nomeInstrumento }}
-        <select class="form-control" [(ngModel)]="instrumento.idInstrumento">
-          <option value="" disabled>Selecione um nível</option>
-          <option *ngFor="let nivel of niveis" [value]="nivel">{{ nivel }}</option>
-        </select>
+    <form (ngSubmit)="adicionarNivelInstrumento()" name="niveisInstrumentosForm">
+      <div class="instrumentos-lista">
+        <div class="instrumento" *ngFor="let instrumento of instrumentos">
+          {{ instrumento.nomeInstrumento }}
+          <select class="form-control" [(ngModel)]="instrumento.experiencia" name="nivelInstrumento{{ instrumento.idInstrumento }}">
+            <option value="" disabled>Selecione um nível</option>
+            <option *ngFor="let experiencia of experiencias" [value]="experiencia">{{ experiencia }}</option>
+          </select>
+        </div>
       </div>
-    </div>
+      <button type="submit" class="btn btn-primary">Salvar Níveis de Instrumentos</button>
+    </form>
   </div>
+  
+  
+  
 
 </div>

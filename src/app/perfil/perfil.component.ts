@@ -6,6 +6,8 @@ import { TipoMusicalService } from '../services/tipo-musical.service';
 import { TipoMusical } from '../models/TipoMusical';
 import { InstrumentoService } from '../services/instrumento.service';
 import { Instrumento } from '../models/Instrumento';
+import { NivelDto } from '../models/NivelDto';
+import { NivelService } from '../services/nivel.service';
 import { Experiencia } from '../models/Experiencia';
 
 @Component({
@@ -19,14 +21,14 @@ export class PerfilComponent implements OnInit {
   perfilForm: FormGroup;
   tiposMusicais: TipoMusical[] = [];
   instrumentos: Instrumento[] = [];
-  tiposMusicaisSelecionados: number[] = [];
-  niveis: Experiencia[] = Object.values(Experiencia);
+  experiencias: Experiencia[] = Object.values(Experiencia);
 
   constructor(
     private authService: AuthService, 
     private formBuilder: FormBuilder,
     private tipoMusicalService: TipoMusicalService,
-    private instrumentoService: InstrumentoService
+    private instrumentoService: InstrumentoService,
+    private nivelService: NivelService
   ) {
     this.perfilForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -56,7 +58,6 @@ export class PerfilComponent implements OnInit {
         celular: this.usuario.celular,
         senha: this.usuario.senha
       });
-      this.tiposMusicaisSelecionados = this.usuario.tiposMusicais || [];
     }
   }
 
@@ -76,28 +77,20 @@ export class PerfilComponent implements OnInit {
         email: this.perfilForm.value.email,
         dataNascimento: this.perfilForm.value.dataNascimento,
         celular: this.perfilForm.value.celular,
-        senha: this.perfilForm.value.senha,
-        tiposMusicais: this.tiposMusicaisSelecionados,
-        bandas: this.usuario.bandas || [],
-        shows: this.usuario.shows || [],
-        experiencias: this.usuario.experiencias || []
+        senha: this.perfilForm.value.senha
       };
       this.authService.updateUsuario(this.usuario.idUser, perfilAtualizado).subscribe(() => {
-        console.log("sucesso")
+        console.log("sucesso");
       });
     }
   }
 
   carregarTiposMusicais(): void {
     this.tipoMusicalService.getAllTipoMusicals().subscribe(tiposMusicais => {
-      this.tiposMusicais = tiposMusicais.map(tipoMusical => {
-        tipoMusical.selecionado = this.tiposMusicaisSelecionados.includes(tipoMusical.id);
-        return tipoMusical;
-      });
+      this.tiposMusicais = tiposMusicais;
     });
   }
   
-
   carregarInstrumentos(): void {
     this.instrumentoService.getAllInstrumentos().subscribe(instrumentos => {
       this.instrumentos = instrumentos;
@@ -113,4 +106,18 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  adicionarNivelInstrumento(): void {
+    if (this.usuario) {
+      for (const instrumento of this.instrumentos) {
+        const nivel: NivelDto = {
+          experiencia: instrumento.experiencia,
+          idInstrumento: instrumento.idInstrumento,
+          idUser: this.usuario.idUser
+        };
+        this.nivelService.createNivel(nivel).subscribe(() => {
+          console.log('Nível de instrumento adicionado com sucesso');
+        });
+      }
+    }
+  }
 }
