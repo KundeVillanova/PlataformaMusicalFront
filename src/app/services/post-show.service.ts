@@ -37,4 +37,11 @@ export class PostShowService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<void>(`${this.baseUrl}/${idShow}`, { headers });
   }
+
+  getPostShowsByUserId(idUser: number): Observable<PostShowDTO[]> {
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<PostShowDTO[]>(`${this.baseUrl}/user/${idUser}`, { headers });
+  }
+
 }

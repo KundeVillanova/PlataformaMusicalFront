@@ -37,7 +37,7 @@
                   [(ngModel)]="postShowForm.ingressos">
               </div>
             </div>
-            
+
             <div class="mb-3">
               <label for="tipoShow" class="form-label">Tipo de Show</label>
               <select class="form-control" id="tipoShow" name="idTipoShow" [(ngModel)]="postShowForm.idTipoShow">
@@ -65,22 +65,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Exemplo de Título 1</td>
-                <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
-                  <button class="btn btn-danger btn-sm">Excluir</button>
-                </td>
-              </tr>
-              <tr>
-                <td>Exemplo de Título 2</td>
+              <tr *ngFor="let postShow of postShowsDoUsuario">
+                <td>{{ postShow.tituloShow }}</td>
                 <td>
                   <button class="btn btn-primary btn-sm">Editar</button>
                   <button class="btn btn-danger btn-sm">Excluir</button>
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table>          
         </div>
       </div>
     </div>
