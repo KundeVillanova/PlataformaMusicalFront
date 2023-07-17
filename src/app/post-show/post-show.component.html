@@ -4,35 +4,52 @@
       <div class="card mx-3 my-3">
         <div class="card-body">
           <h5 class="card-title">Cadastrar PostShow</h5>
-          <form>
+          <form (ngSubmit)="cadastrarPostShow()" name="postShowForm">
             <div class="mb-3">
               <label for="tituloShow" class="form-label">Título do Show</label>
-              <input type="text" class="form-control" id="tituloShow" placeholder="Digite o título do show">
+              <input type="text" class="form-control" id="tituloShow" name="tituloShow" placeholder="Digite o título do show"
+                [(ngModel)]="postShowForm.tituloShow">
             </div>
             <div class="mb-3">
               <label for="descricao" class="form-label">Descrição</label>
-              <textarea class="form-control" id="descricao" rows="3" placeholder="Digite a descrição do show"></textarea>
+              <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Digite a descrição do show"
+                [(ngModel)]="postShowForm.descricao"></textarea>
             </div>
             <div class="row mb-3">
               <div class="col">
                 <label for="dia" class="form-label">Dia</label>
-                <input type="date" class="form-control" id="dia">
+                <input type="date" class="form-control" id="dia" name="dia" [(ngModel)]="postShowForm.dia">
               </div>
               <div class="col">
                 <label for="hora" class="form-label">Hora</label>
-                <input type="time" class="form-control" id="hora">
+                <input type="time" class="form-control" id="hora" name="hora" [(ngModel)]="postShowForm.hora">
               </div>
             </div>
-            <div class="mb-3">
-              <label for="lugar" class="form-label">Lugar</label>
-              <input type="text" class="form-control" id="lugar" placeholder="Digite o lugar do show">
+            <div class="row mb-3">
+              <div class="col-md-8">
+                <label for="lugar" class="form-label">Lugar</label>
+                <input type="text" class="form-control" id="lugar" name="lugar" placeholder="Digite o lugar do show"
+                  [(ngModel)]="postShowForm.lugar">
+              </div>
+              <div class="col-md-4">
+                <label for="ingressos" class="form-label">Ingressos</label>
+                <input type="number" class="form-control" id="ingressos" name="ingressos" placeholder="Quantidade"
+                  [(ngModel)]="postShowForm.ingressos">
+              </div>
             </div>
+            
             <div class="mb-3">
-              <label for="ingressos" class="form-label">Ingressos</label>
-              <input type="number" class="form-control" id="ingressos" placeholder="Digite a quantidade de ingressos">
+              <label for="tipoShow" class="form-label">Tipo de Show</label>
+              <select class="form-control" id="tipoShow" name="idTipoShow" [(ngModel)]="postShowForm.idTipoShow">
+                <option value="" disabled>Selecione um tipo de show</option>
+                <option *ngFor="let tipo of tiposMusicais" [value]="tipo.id">{{ tipo.nomeTipo }}</option>
+              </select>
             </div>
+            <input type="hidden" id="idUser" [(ngModel)]="postShowForm.idUser">
+          
             <button type="submit" class="btn btn-primary">Cadastrar</button>
           </form>
+          
         </div>
       </div>
     </div>
