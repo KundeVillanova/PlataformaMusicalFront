@@ -7,6 +7,7 @@ import { TipoMusical } from '../models/TipoMusical';
 import { InstrumentoService } from '../services/instrumento.service';
 import { Instrumento } from '../models/Instrumento';
 import { Experiencia } from '../models/Experiencia';
+import { Nivel } from '../models/Nivel';
 
 @Component({
   selector: 'app-perfil',
@@ -20,7 +21,7 @@ export class PerfilComponent implements OnInit {
   tiposMusicais: TipoMusical[] = [];
   instrumentos: Instrumento[] = [];
   tiposMusicaisSelecionados: number[] = [];
-  niveis: Experiencia[] = Object.values(Experiencia);
+  exp: Experiencia[] = Object.values(Experiencia);
 
   constructor(
     private authService: AuthService, 
@@ -113,4 +114,13 @@ export class PerfilComponent implements OnInit {
     }
   }
 
+  salvarUserExp(instrumento: Instrumento): void {
+    const nivel: Nivel = {
+      experiencia: instrumento.experiencia,
+      idInstrumento: instrumento.idInstrumento,
+      idUser: this.usuario!.idUser,
+    };
+    console.log(nivel);
+  }
+  
 }
