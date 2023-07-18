@@ -8,6 +8,7 @@ import { InstrumentoService } from '../services/instrumento.service';
 import { Instrumento } from '../models/Instrumento';
 import { Experiencia } from '../models/Experiencia';
 import { Nivel } from '../models/Nivel';
+import { NivelService } from '../services/nivel.service';
 
 @Component({
   selector: 'app-perfil',
@@ -23,11 +24,13 @@ export class PerfilComponent implements OnInit {
   tiposMusicaisSelecionados: number[] = [];
   exp: Experiencia[] = Object.values(Experiencia);
 
+
   constructor(
     private authService: AuthService, 
     private formBuilder: FormBuilder,
     private tipoMusicalService: TipoMusicalService,
-    private instrumentoService: InstrumentoService
+    private instrumentoService: InstrumentoService,
+    private nivelService: NivelService
   ) {
     this.perfilForm = this.formBuilder.group({
       nome: ['', Validators.required],
@@ -121,6 +124,7 @@ export class PerfilComponent implements OnInit {
       idUser: this.usuario!.idUser,
     };
     console.log(nivel);
+    this.nivelService.createNivel(nivel);
   }
   
 }
