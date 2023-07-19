@@ -1,57 +1,56 @@
 <div class="container-fluid">
-    <div class="row">
-      <div class="col">
-        <div class="card mx-3 my-3">
-          <div class="card-body">
-            <h5 class="card-title">Cadastrar PostBanda</h5>
+  <div class="row">
+    <div class="col">
+      <div class="card mx-3 my-3">
+        <div class="card-body">
+          <h5 class="card-title">Cadastrar PostBanda</h5>
 
-            <form (submit)="cadastrarPostBanda()" name="postBandaForm">
-              <div class="mb-3">
-                <label for="tituloBanda" class="form-label">Título da Banda</label>
-                <input type="text" class="form-control" id="tituloBanda" name="tituloBanda" placeholder="Digite o título da banda" [(ngModel)]="postBandaForm.tituloBanda">
-              </div>
-              <div class="mb-3">
-                <label for="descricao" class="form-label">Descrição</label>
-                <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Digite a descrição da banda" [(ngModel)]="postBandaForm.descricao"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="tipoBanda" class="form-label">Tipo de Banda</label>
-                <select class="form-control" id="tipoBanda" name="idTipoMusical" [(ngModel)]="postBandaForm.idTipoMusical">
-                  <option value="" disabled>Selecione um tipo de banda</option>
-                  <option *ngFor="let tipo of tiposMusicais" [value]="tipo.id">{{ tipo.nomeTipo }}</option>
-                </select>
-              </div>
-              <input type="hidden" id="idUser" [(ngModel)]="postBandaForm.idUser">
-              <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </form>            
+          <form (submit)="isEditing ? editarPostBanda() : cadastrarPostBanda()" name="postBandaForm">
+            <div class="mb-3">
+              <label for="tituloBanda" class="form-label">Título da Banda</label>
+              <input type="text" class="form-control" id="tituloBanda" name="tituloBanda" placeholder="Digite o título da banda" [(ngModel)]="postBandaForm.tituloBanda">
+            </div>
+            <div class="mb-3">
+              <label for="descricao" class="form-label">Descrição</label>
+              <textarea class="form-control" id="descricao" name="descricao" rows="3" placeholder="Digite a descrição da banda" [(ngModel)]="postBandaForm.descricao"></textarea>
+            </div>
+            <div class="mb-3">
+              <label for="tipoBanda" class="form-label">Tipo de Banda</label>
+              <select class="form-control" id="tipoBanda" name="idTipoMusical" [(ngModel)]="postBandaForm.idTipoMusical">
+                <option value="" disabled>Selecione um tipo de banda</option>
+                <option *ngFor="let tipo of tiposMusicais" [value]="tipo.id">{{ tipo.nomeTipo }}</option>
+              </select>
+            </div>
+            <input type="hidden" id="idUser" [(ngModel)]="postBandaForm.idUser">
+            <button type="submit" class="btn btn-primary">{{ isEditing ? 'Editar' : 'Cadastrar' }}</button>
+          </form>            
 
-          </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card mx-3 my-3">
-          <div class="card-body">
-            <h5 class="card-title">Listagem de PostBandas</h5>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Título da Banda</th>
-                  <th scope="col">Opções</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let postBanda of postBandasDoUsuario">
-                  <td>{{ postBanda.tituloBanda }}</td>
-                  <td>
-                    <button class="btn btn-primary btn-sm" (click)="editarPostBanda(postBanda.idBanda)">Editar</button>
-                    <button class="btn btn-danger btn-sm" (click)="excluirPostBanda(postBanda.idBanda)">Excluir</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>            
-          </div>
+    </div>
+    <div class="col">
+      <div class="card mx-3 my-3">
+        <div class="card-body">
+          <h5 class="card-title">Listagem de PostBandas</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Título da Banda</th>
+                <th scope="col">Opções</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let postBanda of postBandasDoUsuario">
+                <td>{{ postBanda.tituloBanda }}</td>
+                <td>
+                  <button class="btn btn-primary btn-sm" (click)="selecionarPostBanda(postBanda)">Editar</button>
+                  <button class="btn btn-danger btn-sm" (click)="excluirPostBanda(postBanda.idBanda)">Excluir</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>            
         </div>
       </div>
     </div>
   </div>
-  
+</div>

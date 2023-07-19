@@ -20,12 +20,14 @@ export class PostBandaComponent implements OnInit {
   };
   postBandasDoUsuario: PostBandaDTO[] = [];
   tiposMusicais: TipoMusical[] = [];
+  isEditing: boolean = false;
+  postBandaToEdit: PostBandaDTO | null = null;
 
   constructor(
     private postBandaService: PostBandaService,
     private tipoMusicalService: TipoMusicalService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getTiposMusicais();
@@ -34,7 +36,7 @@ export class PostBandaComponent implements OnInit {
 
   carregarPostBandasDoUsuario(): void {
     if (this.postBandaForm.idUser) {
-      this.postBandaService.getPostBandasByUserId(this.postBandaForm.idUser).subscribe(postBandas => {
+      this.postBandaService.getPostBandasByUserId(this.postBandaForm.idUser).subscribe((postBandas) => {
         this.postBandasDoUsuario = postBandas;
       });
     }
@@ -42,39 +44,31 @@ export class PostBandaComponent implements OnInit {
 
   getTiposMusicais(): void {
     this.tipoMusicalService.getAllTipoMusicals().subscribe(
-      tipos => this.tiposMusicais = tipos,
-      error => console.log('Error fetching tipos musicais:', error)
+      (tipos) => (this.tiposMusicais = tipos),
+      (error) => console.log('Error fetching tipos musicais:', error)
     );
   }
 
   obterIdUser(): void {
     const username = this.authService.obterUsername();
     this.authService.getUsuarioByUsername(username).subscribe(
-      usuario => {
+      (usuario) => {
         this.postBandaForm.idUser = usuario.idUser;
         this.carregarPostBandasDoUsuario();
       },
-      error => console.log('Error fetching user ID:', error)
+      (error) => console.log('Error fetching user ID:', error)
     );
   }
 
   cadastrarPostBanda(): void {
     this.postBandaService.createPostBanda(this.postBandaForm).subscribe(
-      idBanda => {
+      (idBanda) => {
         console.log('Post-banda cadastrado com sucesso! ID:', idBanda);
-        // You may want to redirect or show a success message here
+        this.postBandaToEdit = null;
+        window.location.reload(); // Recarrega a página após cadastrar
       },
-      error => console.log('Error creating post-banda:', error)
+      (error) => console.log('Error creating post-banda:', error)
     );
-  }
-
-  editarPostBanda(idBanda: number | undefined): void {
-    if (idBanda) {
-      // Implemente o código para editar o PostBanda com o ID fornecido
-      console.log('Editar PostBanda com ID:', idBanda);
-    } else {
-      // Trate a situação quando idBanda for undefined
-    }
   }
 
   excluirPostBanda(idBanda: number | undefined): void {
@@ -84,12 +78,27 @@ export class PostBandaComponent implements OnInit {
           console.log('PostBanda excluído com sucesso! ID:', idBanda);
           this.carregarPostBandasDoUsuario();
         },
-        error => console.log('Erro ao excluir PostBanda:', error)
+        (error) => console.log('Erro ao excluir PostBanda:', error)
       );
     } else {
       console.log('ID do PostBanda não fornecido.');
     }
   }
-  
-  
+
+  selecionarPostBanda(postBanda: PostBandaDTO): void {
+    this.isEditing = true;
+    this.postBandaToEdit = postBanda;
+    this.postBandaForm = {
+      idBanda: this.postBandaToEdit.idBanda,
+      tituloBanda: this.postBandaToEdit.tituloBanda,
+      descricao: this.postBandaToEdit.descricao,
+      vagas: this.postBandaToEdit.vagas,
+      idTipoMusical: this.postBandaToEdit.idTipoMusical,
+      idUser: this.postBandaToEdit.idUser
+    };
+  }
+
+  editarPostBanda(): void {
+   
+  }
 }
