@@ -15,7 +15,10 @@ body {
 .container {
   width: 100%;
 }
-
+.custom-input {
+  width: 200px; /* Ajuste o tamanho do input conforme necessário */
+  border-radius: 10px; /* Ajuste o valor para controlar o arredondamento */
+}
 .feed-container {
   display: flex;
   justify-content: space-between;
@@ -24,7 +27,7 @@ body {
 .feed-card {
   background-color: white;
   flex: 1;
-  height: 669px; /* Altura fixa para os cards */
+  height: 615px; /* Altura fixa para os cards */
   margin: 10px; /* Pequena margem para espaçamento entre os cards */
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

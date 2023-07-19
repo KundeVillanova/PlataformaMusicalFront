@@ -71,4 +71,19 @@ export class PostShowComponent implements OnInit {
       });
     }
   }
+
+  excluirPostShow(idShow: number | undefined): void {
+    if (idShow) {
+      this.postShowService.deletePostShow(idShow).subscribe(
+        () => {
+          console.log('PostShow excluído com sucesso! ID:', idShow);
+          this.carregarPostShowsDoUsuario();
+        },
+        error => console.log('Erro ao excluir PostShow:', error)
+      );
+    } else {
+      console.log('ID do PostShow não fornecido.');
+    }
+  }
+  
 }
