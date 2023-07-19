@@ -1,0 +1,57 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.container {
+  width: 100%;
+}
+
+.feed-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.feed-card {
+  background-color: white;
+  flex: 1;
+  height: 669px; /* Altura fixa para os cards */
+  margin: 10px; /* Pequena margem para espaçamento entre os cards */
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+}
+
+.card-title {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.table-wrapper {
+  flex: 1;
+  overflow-y: auto; /* Adiciona uma barra de rolagem caso o conteúdo exceda a altura do card */
+}
+
+.table-hover {
+  font-size: 14px; /* Tamanho da fonte das células da tabela */
+  width: 100%; /* Para garantir que a tabela ocupe todo o espaço disponível */
+}
+
+.table-hover thead th {
+  font-weight: bold;
+}
+
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}

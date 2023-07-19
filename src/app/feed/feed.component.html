@@ -1,1 +1,52 @@
-<p>feed works!</p>
+<div class="container">
+  <div class="feed-container">
+    <div class="feed-card">
+      <div class="table-wrapper">
+        <h2 class="card-title">Feed Bandas</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Postagens</th>
+              <th scope="col">Tipo Musical</th>
+              <th scope="col">Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let postBanda of postBandas">
+              <td>{{ postBanda.tituloBanda }}</td>
+              <td>{{ getNomeTipoMusical(postBanda.idTipoMusical) }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="verMaisBanda(postBanda.idBanda)">Ver Mais</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="feed-card">
+      <div class="table-wrapper">
+        <h2 class="card-title">Feed Shows</h2>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Show</th>
+              <th scope="col">Data</th>
+              <th scope="col">Local</th>
+              <th scope="col">Opções</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let postShow of postShows">
+              <td>{{ postShow.tituloShow }}</td>
+              <td>{{ postShow.dia }}</td>
+              <td>{{ postShow.lugar }}</td>
+              <td>
+                <button class="btn btn-primary" (click)="verMaisShow(postShow.idShow)">Ver Mais</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
