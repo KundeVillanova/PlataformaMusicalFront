@@ -4,8 +4,8 @@
       <div class="card mx-3 my-3">
         <div class="card-body">
           <h5 class="card-title">Cadastrar PostShow</h5>
-          <form (ngSubmit)="cadastrarPostShow()" name="postShowForm">
-            <div class="mb-3">
+
+          <form (ngSubmit)="isEditing ? editarPostShow() : cadastrarPostShow()" name="postShowForm">  <div class="mb-3">
               <label for="tituloShow" class="form-label">Título do Show</label>
               <input type="text" class="form-control" id="tituloShow" name="tituloShow" placeholder="Digite o título do show"
                 [(ngModel)]="postShowForm.tituloShow">
@@ -37,7 +37,7 @@
                   [(ngModel)]="postShowForm.ingressos">
               </div>
             </div>
-
+          
             <div class="mb-3">
               <label for="tipoShow" class="form-label">Tipo de Show</label>
               <select class="form-control" id="tipoShow" name="idTipoShow" [(ngModel)]="postShowForm.idTipoShow">
@@ -46,8 +46,8 @@
               </select>
             </div>
             <input type="hidden" id="idUser" [(ngModel)]="postShowForm.idUser">
-          
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            
+            <button type="submit" class="btn btn-primary">{{ isEditing ? 'Editar' : 'Cadastrar' }}</button>
           </form>
           
         </div>
@@ -68,7 +68,7 @@
               <tr *ngFor="let postShow of postShowsDoUsuario">
                 <td>{{ postShow.tituloShow }}</td>
                 <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
+                  <button class="btn btn-primary btn-sm" (click)="selecionarPostShow(postShow)">Editar</button>
                   <button class="btn btn-danger btn-sm" (click)="excluirPostShow(postShow.idShow)">Excluir</button>
                 </td>
               </tr>

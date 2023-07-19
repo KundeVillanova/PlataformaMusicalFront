@@ -26,6 +26,9 @@ export class PostShowComponent implements OnInit {
   tiposMusicaisSelecionados: number[] = [];
   postShowsDoUsuario: PostShowDTO[] = [];
   usuarioLogado: UsuarioDto | undefined;
+  isEditing: boolean = false;
+  postShowToEdit: PostShowDTO | null = null;
+
 
   constructor(
     private postShowService: PostShowService,
@@ -83,6 +86,29 @@ export class PostShowComponent implements OnInit {
       );
     } else {
       console.log('ID do PostShow não fornecido.');
+    }
+  }
+
+  selecionarPostShow(postShow: PostShowDTO): void {
+    this.isEditing = true; // Define o modo de edição como true
+    this.postShowToEdit = postShow; // Armazena o postShow selecionado em postShowToEdit
+    this.postShowForm = {
+      idShow: this.postShowToEdit.idShow,
+      tituloShow: this.postShowToEdit.tituloShow,
+      descricao: this.postShowToEdit.descricao,
+      dia: this.postShowToEdit.dia,
+      hora: this.postShowToEdit.hora,
+      lugar: this.postShowToEdit.lugar,
+      ingressos: this.postShowToEdit.ingressos,
+      idTipoShow: this.postShowToEdit.idTipoShow,
+      idUser: this.postShowToEdit.idUser
+    };
+  }
+
+  editarPostShow(): void {
+    if (this.postShowToEdit) {
+      // Resto do código para editar o postShow
+      // ...
     }
   }
   
