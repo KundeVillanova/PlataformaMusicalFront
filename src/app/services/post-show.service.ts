@@ -13,11 +13,15 @@ export class PostShowService {
   constructor(private http: HttpClient) { }
 
   getAllPostShows(): Observable<PostShowDTO[]> {
-    return this.http.get<PostShowDTO[]>(this.baseUrl);
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<PostShowDTO[]>(this.baseUrl, { headers });
   }
 
   getPostShow(idShow: number): Observable<PostShowDTO> {
-    return this.http.get<PostShowDTO>(`${this.baseUrl}/${idShow}`);
+    const token = localStorage.getItem('access_token');
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<PostShowDTO>(`${this.baseUrl}/${idShow}`, { headers });
   }
 
   createPostShow(postShowDTO: PostShowDTO): Observable<number> {
@@ -45,3 +49,5 @@ export class PostShowService {
   }
 
 }
+
+export { PostShowDTO };

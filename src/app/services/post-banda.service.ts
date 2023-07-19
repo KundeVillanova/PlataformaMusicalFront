@@ -14,13 +14,13 @@ export class PostBandaService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getAllPostBandas(): Observable<PostBandaDTO[]> {
-    const token = this.authService.getToken();
+    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<PostBandaDTO[]>(this.baseUrl, { headers });
   }
 
   getPostBanda(idBanda: number): Observable<PostBandaDTO> {
-    const token = this.authService.getToken();
+    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.get<PostBandaDTO>(`${this.baseUrl}/${idBanda}`, { headers });
   }
@@ -49,4 +49,6 @@ export class PostBandaService {
     return this.http.get<PostBandaDTO[]>(`${this.baseUrl}/user/${idUser}`, { headers });
   }
 }
+
+export { PostBandaDTO };
 
