@@ -79,11 +79,17 @@ export class PostBandaComponent implements OnInit {
 
   excluirPostBanda(idBanda: number | undefined): void {
     if (idBanda) {
-      // Implemente o código para excluir o PostBanda com o ID fornecido
-      console.log('Excluir PostBanda com ID:', idBanda);
+      this.postBandaService.deletePostBanda(idBanda).subscribe(
+        () => {
+          console.log('PostBanda excluído com sucesso! ID:', idBanda);
+          this.carregarPostBandasDoUsuario();
+        },
+        error => console.log('Erro ao excluir PostBanda:', error)
+      );
     } else {
-      // Trate a situação quando idBanda for undefined
+      console.log('ID do PostBanda não fornecido.');
     }
   }
+  
   
 }

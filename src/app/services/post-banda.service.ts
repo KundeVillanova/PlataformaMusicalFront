@@ -32,13 +32,13 @@ export class PostBandaService {
   }
 
   updatePostBanda(idBanda: number, postBandaDTO: PostBandaDTO): Observable<number> {
-    const token = this.authService.getToken();
+    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.put<number>(`${this.baseUrl}/${idBanda}`, postBandaDTO, { headers });
   }
 
   deletePostBanda(idBanda: number): Observable<void> {
-    const token = this.authService.getToken();
+    const token = localStorage.getItem('access_token');
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     return this.http.delete<void>(`${this.baseUrl}/${idBanda}`, { headers });
   }
